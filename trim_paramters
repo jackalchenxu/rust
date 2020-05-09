@@ -1,0 +1,20 @@
+一个接受命令行参数，把参数前后的空格去掉的例子。
+
+fn main() {
+    for arg in std::env::args().skip(1) {
+        let stripped = strip(&arg);
+        println!("     arg = {:?}", arg);
+        println!("stripped = {:?}", stripped);
+    }
+}
+ 
+fn strip(src: &str) -> &str {
+    let mut dst = &src[..];
+    while dst.starts_with(" ") {
+        dst = &dst[1..]
+    }
+    while dst.ends_with(" ") {
+        dst = &dst[..dst.len() - 1]
+    }
+    dst
+}
